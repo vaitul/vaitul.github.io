@@ -90,6 +90,7 @@
 	});
 
 	/*--/ Star Typed /--*/
+	$(window).ready(function(){
 	if ($('.text-slider').length == 1) {
     var typed_strings = $('.text-slider-items').text();
 		var typed = new Typed('.text-slider', {
@@ -99,7 +100,7 @@
 			backDelay: 1100,
 			backSpeed: 30
 		});
-	}
+	}});
 
 	/*--/ Testimonials owl /--*/
 	$('#testimonial-mf').owlCarousel({
