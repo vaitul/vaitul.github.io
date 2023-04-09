@@ -84,7 +84,6 @@ a:hover {
 
 .bg-image {
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: cover;
   background-position: center center;
 }
@@ -1277,6 +1276,26 @@ footer .credits a {
 }
 
 @media (max-width: 768px) {
+
+  .intro {
+    background-position: -800px center !important;
+  }
+
+  .intro-title {
+    opacity: 0;
+  }
+
+  .intro-subtitle {
+    position: absolute;
+    bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: .6;
+  }
+
   .review-content {
     width: 90% !important;
   }
@@ -1287,13 +1306,14 @@ footer .credits a {
 
 
   .review-container {
-    height: 350px !important;
+    height: 370px !important;
   }
 
-  .carousel-control-prev{
+  .carousel-control-prev {
     margin-left: -25px;
   }
-  .carousel-control-next{
+
+  .carousel-control-next {
     margin-right: -25px;
   }
 
