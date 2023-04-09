@@ -1287,7 +1287,7 @@ footer .credits a {
 
   .intro-subtitle {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -1307,14 +1307,28 @@ footer .credits a {
 
   .review-container {
     height: 370px !important;
+
+    align-items: end !important;
   }
 
-  .carousel-control-prev {
-    margin-left: -25px;
-  }
-
+  .carousel-control-prev,
   .carousel-control-next {
-    margin-right: -25px;
+    align-items: end !important;
+    margin-bottom: -20px;
+  }
+  .carousel-control-prev{
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 70px;
+  }
+
+
+  .carousel-control-next{
+    margin-left: auto;
+    margin-right: auto;
+    left: 70px;
+    right: 0;
   }
 
   .back-to-top {
