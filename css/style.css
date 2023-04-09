@@ -626,11 +626,11 @@ a:hover {
 .intro .intro-title {
   color: #fff;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .intro .intro-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
 }
 
@@ -1233,11 +1233,11 @@ footer .credits a {
   }
 
   .intro .intro-title {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
   }
 
   .intro .intro-subtitle {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 
   .intro-single .intro-title {
@@ -1278,11 +1278,23 @@ footer .credits a {
 
 @media (max-width: 768px) {
   .review-content {
-    width: 100% !important;
+    width: 90% !important;
   }
 
   #home .table-cell {
     padding-top: 150px !important;
+  }
+
+
+  .review-container {
+    height: 350px !important;
+  }
+
+  .carousel-control-prev{
+    margin-left: -25px;
+  }
+  .carousel-control-next{
+    margin-right: -25px;
   }
 
   .back-to-top {
@@ -1305,8 +1317,8 @@ footer .credits a {
   opacity: .9;
 }
 
-.reviewby .text-primary{
-  word-wrap: normal;
+.reviewby .text-primary {
+  white-space: nowrap;
 }
 
 #home .table-cell {
@@ -1321,14 +1333,13 @@ footer .credits a {
   margin-bottom: 5px;
   opacity: .7;
   text-shadow: 1px 1px 3px #000;
-  height: max-content;
 }
 
-#carouselExampleIndicators{
+#carouselExampleIndicators {
   font-size: 40px;
 }
 
-.review-container{
+.review-container {
   height: 270px;
   display: flex;
   align-items: center;
