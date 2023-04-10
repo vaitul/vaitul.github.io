@@ -783,8 +783,9 @@ a:hover {
   background-color: #fff;
   height: 100%;
   box-shadow: 0px 0px 10px #999;
-  border: 1px solid #aaa;
+  border: 1px solid #0078ff;
   transition: .1s linear;
+  border-radius: 5px;
 }
 
 .work-box:hover {
@@ -802,6 +803,7 @@ a:hover {
 .work-img {
   display: block;
   overflow: hidden;
+  border-radius: 4px 4px 0px 0px;
 }
 
 .work-img img {
