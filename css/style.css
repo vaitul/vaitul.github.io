@@ -1198,6 +1198,36 @@ footer .credits a {
   border-radius: .3rem;
 }
 
+
+/*======================================
+//--//-->   connect callout
+======================================*/
+
+.lets-connect-callout{
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}
+.lets-connect-callout h5{
+  color: #fff !important;
+}
+
+.lets-connect-callout .linkedinBtn{
+  /* border: #ddd;
+  color: #fff !important; */
+  font-size: 20px;
+  background-color: #0062d3;
+}
+
+.lets-connect-callout .linkedinBtn:hover{
+  color: #0062d3 !important;
+  background-color: #fff;
+}
+
+.lets-connect-callout .mark{
+  font-size: 30px !important;
+  color: #fff;
+}
+
 @media (min-width: 577px) {
   .counter-box {
     margin-bottom: 1.8rem;
