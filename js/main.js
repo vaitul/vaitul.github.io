@@ -9,14 +9,14 @@
 		}
 	})
 
-	// Preloader
-	$(window).on('load', function () {
-		if ($('#preloader').length) {
-			$('#preloader').delay(100).fadeOut('slow', function () {
-				$(this).remove();
-			});
-		}
-	});
+	// // Preloader
+	// $(window).on('load', function () {
+	// 	if ($('#preloader').length) {
+	// 		$('#preloader').delay(100).fadeOut('slow', function () {
+	// 			$(this).remove();
+	// 		});
+	// 	}
+	// });
 
 	// Back to top button
 	$(window).scroll(function () {
@@ -114,17 +114,4 @@
 			}
 		}
 	});
-
-
-	// var slides = document.querySelectorAll('#slides .slide');
-	// var currentSlide = 0;
-	// var slideInterval = setInterval(nextSlide, 3500);
-
-	// function nextSlide() {
-	// 	slides[currentSlide].className = 'slide';
-	// 	currentSlide = (currentSlide + 1) % slides.length;
-	// 	slides[currentSlide].className = 'slide showing';
-	// }
-
-
 })(jQuery);
