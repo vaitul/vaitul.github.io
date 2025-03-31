@@ -1,0 +1,3 @@
+<Files "/bd/index.html">
+    Header set X-Robots-Tag "noindex, nofollow"
+</Files>
