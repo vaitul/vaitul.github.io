@@ -19,21 +19,21 @@
             const encodedToken = urlParams.get('token');
 
             if (!encodedToken) {
-                document.body.innerHTML = 'm Sorry, Document has expired, Please contact me.'; // No token, show blank page
+                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // No token, show blank page
                 return;
             }
 
             const decodedToken = decodeBase64(encodedToken);
             if (!decodedToken) {
-                document.body.innerHTML = 'm Sorry, Document has expired, Please contact me.'; // Invalid token, show blank page
+                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // Invalid token, show blank page
                 return;
             }
 
             const tokenTime = parseInt(decodedToken, 10);
             const currentTime = Date.now();
-            const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+            const expiryDays = 20 * 24 * 60 * 60 * 1000;
 
-            if (isNaN(tokenTime) || tokenTime > currentTime || (currentTime - tokenTime) > thirtyDays) {
+            if (isNaN(tokenTime) || tokenTime > currentTime || (currentTime - tokenTime) > expiryDays) {
                 document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // Invalid or expired token, show blank page
             }
         }
