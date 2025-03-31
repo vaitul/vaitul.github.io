@@ -5,49 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Vaitul Bhayani</title>
+    <style>
+        #loading {
+            text-align: center;
+            font-size: 18px;
+            display: block;
+        }
+        #error-message {
+            text-align: center;
+            font-size: 18px;
+            display: none;
+        }
+        #content {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 141.4286%;
+            padding-bottom: 0;
+            box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
+            margin-top: 1.6em;
+            margin-bottom: 0.9em;
+            overflow: hidden;
+            border-radius: 8px;
+            will-change: transform;
+        }
+    </style>
     <script>
-        function decodeBase64(str) {
-            try {
-                return atob(str); // Decode Base64
-            } catch (e) {
-                return null; // Return null if decoding fails
-            }
+    async function checkToken() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const encodedToken = urlParams.get('token');
+
+        if (!encodedToken) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-message').style.display = 'block';
+            return;
         }
 
-        function checkToken() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const encodedToken = urlParams.get('token');
+        try {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbwXrD5wzhB-h2MedsryEiKa-jFYz63elHRgOExwoNxxhmjgN84YYvHzmVcLast60qvTGg/exec");
+            const validTokens = await response.json();
 
-            if (!encodedToken) {
-                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // No token, show blank page
+            if (!validTokens.includes(encodedToken)) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error-message').style.display = 'block';
                 return;
             }
-
-            const decodedToken = decodeBase64(encodedToken);
-            if (!decodedToken) {
-                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // Invalid token, show blank page
-                return;
-            }
-
-            const tokenTime = parseInt(decodedToken, 10);
-            const currentTime = Date.now();
-            const expiryDays = 20 * 24 * 60 * 60 * 1000;
-
-            if (isNaN(tokenTime) || tokenTime > currentTime || (currentTime - tokenTime) > expiryDays) {
-                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // Invalid or expired token, show blank page
-            }
+            
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        } catch (error) {
+            console.error("Failed to fetch valid tokens:", error);
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-message').style.display = 'block';
         }
+    }
 
-        window.onload = checkToken;
-    </script>
+    window.onload = checkToken;
+</script>
 </head>
 <body>
-<div id="content" style="position: relative; width: 100%; height: 0; padding-top: 141.4286%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAGjRaKyDUU/MRO6kr5S0iBR4_xuKuCDiA/view?embed">
-  </iframe>
-</div>
+    <p id="loading">Loading...🏃🏻‍➡️🏃🏻‍➡️</p>
+    <p id="error-message">Doc has expired! Contact Vaitul. 😊</p>
+    <div id="content">
+        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+            src="https://www.canva.com/design/DAGjRaKyDUU/MRO6kr5S0iBR4_xuKuCDiA/view?embed">
+        </iframe>
+    </div>
 </body>
 </html>
