@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Vaitul Bhayani</title>
+    <script>
+        function decodeBase64(str) {
+            try {
+                return atob(str); // Decode Base64
+            } catch (e) {
+                return null; // Return null if decoding fails
+            }
+        }
+
+        function checkToken() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedToken = urlParams.get('token');
+
+            if (!encodedToken) {
+                document.body.innerHTML = 'm Sorry, Document has expired, Please contact me.'; // No token, show blank page
+                return;
+            }
+
+            const decodedToken = decodeBase64(encodedToken);
+            if (!decodedToken) {
+                document.body.innerHTML = 'm Sorry, Document has expired, Please contact me.'; // Invalid token, show blank page
+                return;
+            }
+
+            const tokenTime = parseInt(decodedToken, 10);
+            const currentTime = Date.now();
+            const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
+            if (isNaN(tokenTime) || tokenTime > currentTime || (currentTime - tokenTime) > thirtyDays) {
+                document.body.innerHTML = 'Im Sorry, Document has expired, Please contact me.'; // Invalid or expired token, show blank page
+            }
+        }
+
+        window.onload = checkToken;
+    </script>
+</head>
+<body>
+<div id="content" style="position: relative; width: 100%; height: 0; padding-top: 141.4286%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAGjRaKyDUU/MRO6kr5S0iBR4_xuKuCDiA/view?embed">
+  </iframe>
+</div>
+</body>
+</html>
