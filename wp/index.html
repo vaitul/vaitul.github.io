@@ -29,7 +29,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             padding: 20px;
-            min-height: calc(100vh - 19px);
         }
         
         .header {
@@ -211,7 +210,11 @@
     <div class="container" id="containerMain">
         <div class="header">
             <h1>📱 WhatsApp Chat Reader</h1>
-            <p>Load and view exported WhatsApp chats</p>
+            <p>
+                <small> This tool allows you to view and analyze WhatsApp chat history exported from the app. Simply upload your exported chat file (either a .txt or .zip) to see the conversation in a readable format. Go to any chat export
+                and click on the "Export Chat" button to get the file.
+            </small>
+            </p>
         </div>
 
         <div class="upload-section">
@@ -442,7 +445,7 @@
         }
     </script>
 
-    <footer style="text-align: center; background-color: #075e54; color: white;">
+    <footer style="text-align: center; background-color: #075e54; color: white; max-width: 800px; margin: 0 auto;  margin-top: 20px; border-radius: 4px;">
         <small>Made by <a style="color: white;" href="https://www.linkedin.com/in/vaitul/" target="_blank">Vaitul</a> with 💖</small></footer>
 </body>
 
