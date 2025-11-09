@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,41 +13,42 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #f0f2f5;
-            padding: 20px;
             min-height: 100vh;
             -webkit-tap-highlight-color: transparent;
         }
-
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            padding: 20px;
+            min-height: calc(100vh - 19px);
         }
-
+        
         .header {
             background: #075e54;
             color: white;
             padding: 20px;
             text-align: center;
         }
-
+        
         .upload-section {
             padding: 40px 20px;
             text-align: center;
             border-bottom: 1px solid #e9edef;
         }
-
+        
         .file-input {
             display: none;
         }
-
+        
         .upload-btn {
             background: #25d366;
             color: white;
@@ -57,74 +59,80 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-
+        
         .upload-btn:hover {
             background: #20ba5a;
         }
-
+        
         .upload-btn:active {
             background: #1da851;
             transform: scale(0.98);
         }
-
+        
         .upload-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
         }
-
+        
         .file-types {
             margin-top: 10px;
             font-size: 13px;
             color: #667781;
         }
-
+        
         .loading {
             display: none;
             padding: 20px;
             text-align: center;
             color: #667781;
         }
-
+        
         .chat-container {
             display: none;
             padding: 20px;
             max-height: 600px;
             overflow-y: auto;
         }
-
+        
         .message {
             margin-bottom: 12px;
             clear: both;
             animation: fadeIn 0.3s;
             display: flex;
         }
-
+        
         .message.sent {
             justify-content: flex-end;
         }
-
+        
         .message.received {
             justify-content: flex-start;
         }
-
+        
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
+        
         .message-content {
             background: #d9fdd3;
             padding: 8px 12px;
             border-radius: 8px;
             max-width: 70%;
             word-wrap: break-word;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
-
+        
         .message.system {
             justify-content: center;
         }
-
+        
         .message.system .message-content {
             background: #fef5e7;
             text-align: center;
@@ -133,29 +141,29 @@
             font-size: 13px;
             max-width: 80%;
         }
-
+        
         .message.received .message-content {
             background: white;
         }
-
+        
         .sender {
             font-weight: 600;
             color: #075e54;
             margin-bottom: 4px;
             font-size: 14px;
         }
-
+        
         .text {
             color: #111b21;
             line-height: 1.4;
         }
-
+        
         .timestamp {
             font-size: 11px;
             color: #667781;
             margin-top: 4px;
         }
-
+        
         .media-placeholder {
             background: #f0f2f5;
             padding: 8px;
@@ -164,13 +172,13 @@
             color: #667781;
             font-size: 13px;
         }
-
+        
         .media-image {
             max-width: 100%;
             border-radius: 8px;
             margin-top: 8px;
         }
-
+        
         .error {
             display: none;
             padding: 20px;
@@ -179,27 +187,28 @@
             border-radius: 4px;
             margin: 20px;
         }
-
+        
         .chat-info {
             padding: 15px 20px;
             background: #f0f2f5;
             border-bottom: 1px solid #e9edef;
             display: none;
         }
-
+        
         .chat-info h3 {
             color: #075e54;
             margin-bottom: 5px;
         }
-
+        
         .chat-info p {
             color: #667781;
             font-size: 14px;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
+    <div class="container" id="containerMain">
         <div class="header">
             <h1>📱 WhatsApp Chat Reader</h1>
             <p>Load and view exported WhatsApp chats</p>
@@ -224,19 +233,19 @@
 
         <div class="chat-info" id="chatInfo"></div>
 
-        <div class="chat-container" id="chatContainer"></div>
+        <!-- <div class="chat-container" id="chatContainer"></div> -->
     </div>
 
     <script>
         const fileInput = document.getElementById('fileInput');
         const loading = document.getElementById('loading');
         const error = document.getElementById('error');
-        const chatContainer = document.getElementById('chatContainer');
+        const chatContainer = document.getElementById('containerMain'); // Or chatContainer
         const chatInfo = document.getElementById('chatInfo');
 
         let mediaFiles = {};
 
-        fileInput.addEventListener('change', async (e) => {
+        fileInput.addEventListener('change', async(e) => {
             const file = e.target.files[0];
             if (!file) return;
 
@@ -271,12 +280,12 @@
             // Find the chat text file and media files
             for (let filename in zip.files) {
                 const zipEntry = zip.files[filename];
-                
+
                 if (filename.endsWith('.txt') && !zipEntry.dir) {
                     chatText = await zipEntry.async('text');
                 } else if (!zipEntry.dir && (
-                    filename.match(/\.(jpg|jpeg|png|gif|mp4|webp|opus|mp3|pdf|vcf|3gp|aac|m4a|webm)$/i)
-                )) {
+                        filename.match(/\.(jpg|jpeg|png|gif|mp4|webp|opus|mp3|pdf|vcf|3gp|aac|m4a|webm)$/i)
+                    )) {
                     const blob = await zipEntry.async('blob');
                     const cleanFilename = filename.split('/').pop();
                     mediaFiles[cleanFilename] = URL.createObjectURL(blob);
@@ -309,7 +318,7 @@
 
         function displayMessages(messages) {
             chatContainer.innerHTML = '';
-            
+
             // Show chat info
             const senders = [...new Set(messages.filter(m => m.author).map(m => m.author))];
             chatInfo.innerHTML = `
@@ -320,7 +329,7 @@
 
             messages.forEach((msg, index) => {
                 const messageDiv = document.createElement('div');
-                
+
                 // Check if it's a system message
                 if (!msg.author) {
                     messageDiv.className = 'message system';
@@ -335,7 +344,7 @@
                 // Check if message is from "Vaitul" (sent) or others (received)
                 const isSent = msg.author.trim().toLowerCase() === 'vaitul';
                 messageDiv.className = `message ${isSent ? 'sent' : 'received'}`;
-                
+
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'message-content';
 
@@ -353,7 +362,7 @@
 
                     if (mediaUrl) {
                         const ext = fileName.split('.').pop().toLowerCase();
-                        
+
                         if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
                             const img = document.createElement('img');
                             img.src = mediaUrl;
@@ -432,5 +441,9 @@
             error.style.display = 'none';
         }
     </script>
+
+    <footer style="text-align: center; background-color: #075e54; color: white;">
+        <small>Made by <a style="color: white;" href="https://www.linkedin.com/in/vaitul/" target="_blank">Vaitul</a> with 💖</small></footer>
 </body>
+
 </html>
